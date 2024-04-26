@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill management</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+
+<body>
+    <%- include("components/header") %>
+    <div class="container">
+        <div id="inner" class="inner">
+            <div class="upper">
+                <div class="recepientLabels">
+                    <label for="customerName">Customer Name</label>
+                    <label for="customerAddress">Customer Address</label>
+                    <label for="customerCity">Customer City</label>
+                    <label for="customerDistrict">Customer District</label>
+                    <label for="customerState">Customer State</label>
+                    <label for="customerPincode">Customer Pincode</label>
+                    <label for="customerGSTIN">Customer GSTIN</label>
+                    <label for="transport">Transport</label>
+                    <label for="Vehicle">Vehicle No</label>
+                </div>
+                <div class="recepientInputs">
+                    <input type="text" id="customerName" placeholder="Enter Customer Name" />
+                    <input type="text" id="customerAddress" placeholder="Enter Customer Address" />
+                    <input type="text" id="customerCity" placeholder="Enter Customer city" />
+                    <input type="text" id="customerDistrict" placeholder="Enter Customer District" />
+                    <input type="text" id="customerState" placeholder="Enter Customer state" />
+                    <input type="text" id="customerPincode" placeholder="Enter Customer pincode" />
+                    <input type="text" id="customerGSTIN" placeholder="Enter Customer GSTIN" />
+                    <input type="text" id="transport" placeholder="Enter Transport" />
+                    <input type="text" id="VehicleNo" placeholder="Enter Vehicle no" />
+                </div>
+            </div>
+            <div class="lower">
+                <div class="labels">
+                    <label for="item">Item:</label>
+                    <label for="quantity">Quantity:</label>
+                    <label for="price">Price:</label>
+                    <!-- <label for="discount">Discount:</label> -->
+                </div>
+                <div class="inputs">
+                    <input type="text" list="itemsuggestions" name="item" id="item" placeholder="ex. Engine oil">
+                    <datalist id="itemsuggestions"></datalist>
+                    <input type="number" name="quantity" id="quantity" placeholder="ex. 1">
+                    <input type="number" name="price" id="price" placeholder="ex. 3686">
+                    <!-- <input type="number" name="discount" id="discount"> -->
+                </div>
+            </div>
+            <input type="button" name="addItem" id="addItem" value="Add">
+            <input type="button" name="navbar" id="newBill" value="New Bill">
+        </div>
+        <div class="billDiv">
+            <%- include("components/bill") %>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/home.js"></script>
+
+</html>

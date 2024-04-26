@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.billHistoryContainer{
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+.billHistoryContainer table{
+    width: 70%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+.billHistoryContainer table th,.billHistoryContainer table td{
+    border: 1px solid black;
+    padding: 5px;
+}
+.billDiv{
+    display: none;
+}
+.printbtn{
+    padding: 2px 5px;
+    background: green;
+    border: none;
+    color: white;
+}
+
+@media print {
+    .billHistoryContainer {
+        display: none;
+    }
+}

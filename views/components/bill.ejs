@@ -1,0 +1,249 @@
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+
+        font-family: sans-serif;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+
+    }
+
+    .bill {
+        box-sizing: border-box;
+        margin: 10px;
+        width: 205mm;
+        height: fit-content;
+        border: 1px solid black;
+    }
+
+    .header {
+        box-sizing: border-box;
+        border: 1px solid #000000;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .header h4 {
+
+        text-align: left;
+        margin: 5px;
+    }
+
+    .header h3 {
+        text-decoration: underline;
+        font-weight: 700;
+    }
+
+    .details {
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .details div {
+        border: 1px solid #000000;
+        padding: 5px;
+    }
+
+    .irncontainer {
+        box-sizing: border-box;
+        font-size: 0.8rem;
+    }
+
+    .tableContainer {
+        border: 1px solid black;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    .billTable,
+    .billTable th,
+    .billTable td {
+        border: 1px solid;
+        border-top: 0px;
+    }
+
+    .billTable {
+        border-collapse: collapse;
+        border: 1p;
+    }
+
+    .billTable th,
+    .billTable td {
+        padding: 5px;
+    }
+
+    .footer {
+        display: flex;
+        border: 1px solid black;
+    }
+
+    .bankDetail {
+        text-align: center;
+    }
+
+    .authoriser {
+        border-left: 1px solid black;
+    }
+
+    .signature {
+        padding: 5px;
+        border-bottom: 1px solid black;
+        height: 40px;
+    }
+
+    .TermsCondition {
+        padding: 5px;
+    }
+
+    .TermsCondition ol {
+        margin-left: 25px;
+    }
+
+    #saveBill {
+        float: right;
+        /* background-image: url("../../public/icons8-save-48.png")  ; */
+        background-size: 100% 100%;
+        border: none;
+        width: 40px;
+        height: 30px;
+        cursor: pointer;
+    }
+
+    @media print {
+        #saveBill {
+            display: none;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="bill">
+        <div class="header">
+            <h4>GSTIN : 06ADVFS7869P1ZL</h4>
+            <button id="saveBill">save</button>
+            <h3>TAX INVOICE </h3>
+            <h1>Sahavi Enterprises and Associates</h1>
+            <p>Hinori Road<br> Near Sabji Mandi, Ladwa, 136132</p>
+            <span>CIN :_____________; PAN :___________</span>
+            <h5>Tel. : 7027011887,9560711556 email : sahavi.enterprice@gmail.com </h5>
+        </div>
+        <div class="details">
+
+            <div>
+                <h5>Invoice No. : <span id="invoiceNo"> </span> </h5>
+                <h5>Dated : <span id="date"> 06-11-2023 </span></h5>
+                <h5>Place of Supply : <span id="placeOfSpply"></span> </h5>
+                <h5>Reverse Charge : </h5>
+                <h5>GR/RR No. :</h5>
+            </div>
+            <div>
+                <h5>Transport : <span id="transportBill"></span></h5>
+                <h5>Vehicle No. : <span id="vehicleNoBill"></span></h5>
+                <h5>Station : <span id="stationBill"> </span></h5>
+                <h5>E-Way Bill No. : <span></span></h5>
+                <h5>Content :<span></span></h5>
+            </div>
+            <div>
+                <h5>Billed to :</h5>
+                <h5 id="customerNameBill">Sahavi Enterprises & Associates </h5>
+                <h5 id="customerAddressBill">Ladwa </h5>
+                <h5 id="customerDistrictBill">Kurukshetra </h5>
+                <h5 id="customerStateBill">Haryana</h5>
+                <h5>GSTIN / UIN :<span id="customerGSTINBill"> 06ADVFS7869P1ZL </span> </h5>
+            </div>
+            <div>
+                <h5>Shipped to : </h5>
+                <h5 id="customerNameShipped">Sahavi Enterprises & Associates </h5>
+                <h5 id="customerAddressShipped">Ladwa </h5>
+                <h5 id="customerDistrictShipped">Kurukshetra </h5>
+                <h5 id="customerStateShipped">Haryana</h5>
+                <h5>GSTIN / UIN : <span id="customerGSTINShipped"> 06ADVFS7869P1ZL </span></h5>
+            </div>
+
+        </div>
+        <!-- <div class="irncontainer">IRN : 706560f8fd0b5886f949773bda9e09fae19f504dd20372ed306408962b6c27f6 Ack.No. : 172313805086529 Ack. Date : 06-11-2023</div> -->
+        <div class="tableContainer">
+            <table class="billTable" id="billTable">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Description of Goods</th>
+                        <th>HSN Code</th>
+                        <th>Qty.</th>
+                        <th>Unit</th>
+                        <th>Price/Unit</th>
+                        <th>Discount</th>
+                        <th>IGST Rate </th>
+                        <th>IGST Amount</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">Grand Total</td>
+                        <td id="grandTotal">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="bankDetail">
+                <p>Company Bank Details</p>
+                <p>Bank of Baroda :- 53500200000068 </p>
+                <p>IFCS/RTGS CODE:- BARB0LADWAX <br> Branch :- Ladwa</p>
+                <!-- <p>Punjab National Bank :- 0613002100024409 </p>
+                <p>IFCS/RTGS CODE:- PUNB0061300 Branch :- Gokhale Market</p> -->
+            </div>
+
+        </div>
+        <div class="footer">
+            <div class="TermsCondition">
+                Terms & Conditions
+                E.& O.E.
+                <ol>
+                    <li>All the Part No./Description/Logo are for reference only.</li>
+                    <li>Interest @ 18% p.a. will be charged if the payment is not made with in the stipulated time.</li>
+                    <li>Subject to 'Delhi' Jurisdiction only.</li>
+                    <li>This is a Computer Generated Invoice</li>
+                </ol>
+            </div>
+            <div class="authoriser">
+                <div class="signature">Receiver's Signature :</div>
+                <div>
+                    <div>For DOZER SPARES COMPANY</div>
+                    <div>Authorised Signatory</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const invoiceNo = document.getElementById("invoiceNo");
+    const date = document.getElementById("date");
+    const placeOfSpply = document.getElementById("placeOfSpply");
+    const transportBill = document.getElementById("transportBill");
+    const vehicleNoBill = document.getElementById("vehicleNoBill");
+    const stationBill = document.getElementById("stationBill");
+
+    const customerNameBill = document.getElementById("customerNameBill");
+    const customerAddressBill = document.getElementById("customerAddressBill");
+    const customerDistrictBill = document.getElementById("customerDistrictBill");
+    const customerStateBill = document.getElementById("customerStateBill");
+    const customerGSTINBill = document.getElementById("customerGSTINBill");
+
+    const customerNameShipped = document.getElementById("customerNameShipped");
+    const customerAddressShipped = document.getElementById("customerAddressShipped");
+    const customerDistrictShipped = document.getElementById("customerDistrictShipped");
+    const customerStateShipped = document.getElementById("customerStateShipped");
+    const customerGSTINShipped = document.getElementById("customerGSTINShipped");
+    const printBill=document.getElementById("saveBill")
+
+    date.innerText = new Date().toLocaleDateString();
+    
+</script>
