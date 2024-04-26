@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require('express');
-const app=express();
+const app = express();
 const session = require("express-session");
 
-const db = require("./Models/db");
-const {userRouter} =require("./routes/userRoute")
+const db = require("./models/db");
+const { userRouter } = require("./routes/userRoute")
 
 app.set('view engine', 'ejs');
 const sessionMiddleware = session({
@@ -17,7 +17,7 @@ app.use(express.static("styles"));
 app.use(express.static("scripts"));
 app.use(express.json());
 app.use(express.urlencoded({
-    extended:true
+    extended: true
 }));
 app.use('/', userRouter);
 
