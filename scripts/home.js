@@ -1,137 +1,137 @@
-const customerName=document.getElementById("customerName");
-const customerAddress=document.getElementById("customerAddress");
-const customerCity=document.getElementById("customerCity");
-const customerDistrict=document.getElementById("customerDistrict");
-const customerState=document.getElementById("customerState");
-const customerPincode=document.getElementById("customerPincode");
-const customerGSTIN=document.getElementById("customerGSTIN");
-const transport=document.getElementById("transport");
-const VehicleNo=document.getElementById("VehicleNo");
+const customerName = document.getElementById("customerName");
+const customerAddress = document.getElementById("customerAddress");
+const customerCity = document.getElementById("customerCity");
+const customerDistrict = document.getElementById("customerDistrict");
+const customerState = document.getElementById("customerState");
+const customerPincode = document.getElementById("customerPincode");
+const customerGSTIN = document.getElementById("customerGSTIN");
+const transport = document.getElementById("transport");
+const VehicleNo = document.getElementById("VehicleNo");
 
-const item=document.getElementById("item");
-const price=document.getElementById("price");
+const item = document.getElementById("item");
+const price = document.getElementById("price");
 
-customerName.addEventListener("change",function(ev){
-    customerNameBill.innerText=customerName.value.trim();
-    customerNameShipped.innerText=customerName.value.trim();
+customerName.addEventListener("change", function (ev) {
+    customerNameBill.innerText = customerName.value.trim();
+    customerNameShipped.innerText = customerName.value.trim();
 });
 
-customerAddress.addEventListener("change",function(ev){
-    customerAddressBill.innerText=customerAddress.value.trim();
-    customerAddressShipped.innerText=customerAddress.value.trim();
+customerAddress.addEventListener("change", function (ev) {
+    customerAddressBill.innerText = customerAddress.value.trim();
+    customerAddressShipped.innerText = customerAddress.value.trim();
 });
 
-customerCity.addEventListener("change",function(ev){
+customerCity.addEventListener("change", function (ev) {
     // customerAddressBill.innerText=customerCity.value.trim();
     // customerCityShipped.innerText=customerCity.value.trim();
 });
 
-customerDistrict.addEventListener("change",function(ev){
-    customerDistrictBill.innerText=customerDistrict.value.trim();
-    customerDistrictShipped.innerText=customerDistrict.value.trim();
+customerDistrict.addEventListener("change", function (ev) {
+    customerDistrictBill.innerText = customerDistrict.value.trim();
+    customerDistrictShipped.innerText = customerDistrict.value.trim();
 });
 
-customerState.addEventListener("change",function(ev){
-    customerStateBill.innerText=customerState.value.trim();
-    customerStateShipped.innerText=customerState.value.trim();
+customerState.addEventListener("change", function (ev) {
+    customerStateBill.innerText = customerState.value.trim();
+    customerStateShipped.innerText = customerState.value.trim();
 });
 
-customerPincode.addEventListener("change",function(ev){
+customerPincode.addEventListener("change", function (ev) {
     // customerStateBill.innerText=customerPincode.value.trim();
     // customerStateShipped.innerText=customerPincode.value.trim();
 });
 
-customerGSTIN.addEventListener("change",function(ev){
-    customerGSTINBill.innerText=customerGSTIN.value.trim();
-    customerGSTINShipped.innerText=customerGSTIN.value.trim();
+customerGSTIN.addEventListener("change", function (ev) {
+    customerGSTINBill.innerText = customerGSTIN.value.trim();
+    customerGSTINShipped.innerText = customerGSTIN.value.trim();
 });
 
-transport.addEventListener("change",function(ev){
-    transportBill.innerText=transport.value.trim();
+transport.addEventListener("change", function (ev) {
+    transportBill.innerText = transport.value.trim();
 });
-VehicleNo.addEventListener("change",function(ev){
-    vehicleNoBill.innerText=VehicleNo.value.trim();
+VehicleNo.addEventListener("change", function (ev) {
+    vehicleNoBill.innerText = VehicleNo.value.trim();
 });
 
-item.addEventListener("input",(ev)=>{
-    const selected=productsList.filter(t=>t.name==$('#item').val());
-    if(selected[0]){
-        price.value=selected[0].price;
+item.addEventListener("input", (ev) => {
+    const selected = productsList.filter(t => t.name == $('#item').val());
+    if (selected[0]) {
+        price.value = selected[0].price;
     }
 })
 
 
-let productsList=[];
-let i=0;
+let productsList = [];
+let i = 0;
 
-const bill={
-    invoiceNo:"String",
-    billdetails:[],
-    billItems:[],
-    grandTotal:0,
+const bill = {
+    invoiceNo: "String",
+    billdetails: [],
+    billItems: [],
+    grandTotal: 0,
     date: new Date().toLocaleDateString(),
 }
 
-function getInvoiceNo(){
-    fetch("/invoiceNo").then(function(response){
-        if(response.status==200){
+function getInvoiceNo() {
+    fetch("/invoiceNo").then(function (response) {
+        if (response.status == 200) {
             return response.json();
         }
-    }).then(function(invoiceNo){
-        bill.invoiceNo=invoiceNo.invoiceNo;
+    }).then(function (invoiceNo) {
+        bill.invoiceNo = invoiceNo.invoiceNo;
         $('#invoiceNo').text(invoiceNo.invoiceNo);
-    }).catch(function(err){
+    }).catch(function (err) {
         console.log("something went wrong");
     });
 }
 
-fetch("/products").then(function(response){
-    if(response.status==200){
+fetch("/products").then(function (response) {
+    if (response.status == 200) {
         return response.json();
     }
-    else{
+    else {
         console.log("something went wrong");
     }
-}).then(function(products){
-    productsList=products;
+}).then(function (products) {
+    productsList = products;
     createDatalist(productsList)
-}).catch(function(err){
+}).catch(function (err) {
     console.log(err);
 })
 
 const addBtn = $('#addItem')
-addBtn.click((e)=>{
-    if($('#item').val()==""){
+addBtn.click((e) => {
+    if ($('#item').val() == "") {
         alert("plese enter product name");
         return;
     }
-    if(!$('#quantity').val()){
+    if (!$('#quantity').val()) {
         alert("plese enter quantity");
         return;
     }
-    if(!$('#price').val()){
+    if (!$('#price').val()) {
         alert("please enter price");
         return;
     }
-    const item = productsList.filter(t=>t.name==$('#item').val());
-    if(item[0]){
-        item[0].srNo=++i;
-        item[0].quantity=$('#quantity').val();
-        item[0].price=$('#price').val();
+    const item = productsList.filter(t => t.name == $('#item').val());
+    if (item[0]) {
+        item[0].srNo = ++i;
+        item[0].quantity = $('#quantity').val();
+        item[0].price = $('#price').val();
         insertRow(item[0]);
     }
-    
+
     $('#item').val("");
     $('#quantity').val("");
     $('#price').val(0);
 });
 
-function insertRow(data){
-    const gstAmt=data.price*data.quantity*data.gst/100;
-    const amount=data.price*data.quantity+gstAmt;
-    data.gstAmt=gstAmt.toFixed(2);
-    data.amount=amount.toFixed(2);
-    bill.grandTotal=bill.grandTotal+amount;
+function insertRow(data) {
+    const gstAmt = data.price * data.quantity * data.gst / 100;
+    const amount = data.price * data.quantity + gstAmt;
+    data.gstAmt = gstAmt.toFixed(2);
+    data.amount = amount.toFixed(2);
+    bill.grandTotal = bill.grandTotal + amount;
     $("#billTable tbody").append(
         `<tr>
             <td>${data.srNo}</td>
@@ -150,46 +150,47 @@ function insertRow(data){
     bill.billItems.push(data);
 }
 
-function createDatalist(array){
-    const arr = array.map((val, index)=>{
-        return $op = $("<option>", {id: index, "class": "option", "value":val.name}); 
+function createDatalist(array) {
+    const arr = array.map((val, index) => {
+        return $op = $("<option>", { id: index, "class": "option", "value": val.name });
     })
     $("#itemsuggestions").append(arr)
 }
 
 getInvoiceNo();
 
-const savebtn=$('#saveBill');
-savebtn.click((ev)=>{
-    const billdetails={
-        customerName:customerName.value.trim(),
-        customerAddress:customerAddress.value.trim(),
-        customerDistrict:customerDistrict.value.trim(),
-        customerState:customerState.value.trim(),
-        customerGSTIN:customerGSTIN.value.trim(),
-        transportBill:transport.value.trim(),
-        vehicleNoBill:VehicleNo.value.trim()
+const savebtn = $('#saveBill');
+savebtn.click((ev) => {
+    const billdetails = {
+        customerName: customerName.value.trim(),
+        customerAddress: customerAddress.value.trim(),
+        customerDistrict: customerDistrict.value.trim(),
+        customerState: customerState.value.trim(),
+        customerGSTIN: customerGSTIN.value.trim(),
+        transportBill: transport.value.trim(),
+        vehicleNoBill: VehicleNo.value.trim()
     }
-    if(!customerName.value.trim()){
+    if (!customerName.value.trim()) {
         alert("enter customer detail");
         return;
     }
     bill.billdetails.push(billdetails);
-    fetch("/newBill",{
-        method:"POST",
+    fetch("/newBill", {
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body:JSON.stringify(bill)
-    }).then(function(response){
-        if(response.status==200){
+        body: JSON.stringify(bill)
+    }).then(function (response) {
+        if (response.status == 200) {
             console.log("saved");
         }
     });
-    
+
     print();
+    getInvoiceNo();
 })
 
-$("#newBill").click(ev=>{
+$("#newBill").click(ev => {
     window.location.reload();
 })
