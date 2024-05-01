@@ -1,25 +1,31 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
-.billHistoryContainer{
+
+.billHistoryContainer {
     padding: 5px;
     display: flex;
     justify-content: center;
 }
-.billHistoryContainer table{
+
+.billHistoryContainer table {
     width: 70%;
     border-collapse: collapse;
     border: 1px solid black;
 }
-.billHistoryContainer table th,.billHistoryContainer table td{
+
+.billHistoryContainer table th,
+.billHistoryContainer table td {
     border: 1px solid black;
     padding: 5px;
 }
-.billDiv{
+
+.billDiv {
     display: none;
 }
-.printbtn{
+
+.printbtn {
     padding: 2px 5px;
     background: green;
     border: none;
@@ -29,5 +35,38 @@
 @media print {
     .billHistoryContainer {
         display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .billHistoryContainer {
+        padding: 10px;
+        margin: 5px;
+        width: 94vw;
+        overflow-x: scroll;
+        /* border: 1px solid black; */
+    }
+
+    .billHistoryContainer table {
+        width: auto;
+        margin: 10px;
+        margin-left: 8rem;
+    }
+
+    .billHistoryContainer table th,
+    .billHistoryContainer table td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .billDiv {
+        display: none;
+    }
+
+    .printbtn {
+        padding: 2px 5px;
+        background: green;
+        border: none;
+        color: white;
     }
 }

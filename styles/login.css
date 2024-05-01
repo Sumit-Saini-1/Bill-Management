@@ -1,8 +1,9 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
 }
-.container{
+
+.container {
     margin: 10px;
     height: 85vh;
     display: flex;
@@ -10,7 +11,8 @@
     justify-content: center;
     align-items: center;
 }
-.container form{
+
+.container form {
     height: 60vh;
     width: 30%;
     padding: 20px;
@@ -21,7 +23,8 @@
     border: none;
     box-shadow: 0px 0px 8px grey;
 }
-.formelement{
+
+.formelement {
     display: flex;
     flex-direction: column;
     padding: 3px;
@@ -34,11 +37,47 @@
     padding: 10px;
 }
 
-#submit{
+#submit {
     border-radius: 5px;
     font-size: 15px;
     border: none;
     background-color: dodgerblue;
     color: white;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        margin: 5px;
+        height: 85vh;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container form {
+        height: 60vh;
+        width: 70%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        box-shadow: 0px 0px 8px grey;
+    }
+
+    .formelement {
+        display: flex;
+        flex-direction: column;
+        padding: 3px;
+        margin: 2px;
+        width: 70vw;
+    }
+
+    .formelement input {
+        margin: 3px;
+        padding: 10px;
+    }
 }

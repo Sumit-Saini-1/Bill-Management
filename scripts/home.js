@@ -188,7 +188,7 @@ savebtn.click((ev) => {
     });
 
     print();
-    getInvoiceNo();
+    // getInvoiceNo();
 })
 
 $("#newBill").click(ev => {
