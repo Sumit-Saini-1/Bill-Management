@@ -73,7 +73,7 @@ const bill = {
 }
 
 function getInvoiceNo() {
-    fetch("/invoiceNo").then(function (response) {
+    fetch("/bill/invoiceNo").then(function (response) {
         if (response.status == 200) {
             return response.json();
         }
@@ -85,7 +85,7 @@ function getInvoiceNo() {
     });
 }
 
-fetch("/products").then(function (response) {
+fetch("/product/products").then(function (response) {
     if (response.status == 200) {
         return response.json();
     }
@@ -192,7 +192,7 @@ savebtn.click((ev) => {
         alert("Enter atleast one item");
         return;
     }
-    fetch("/newBill", {
+    fetch("/bill/newBill", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

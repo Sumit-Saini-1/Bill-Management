@@ -4,7 +4,9 @@ const app = express();
 const session = require("express-session");
 
 const db = require("./models/db");
-const { userRouter } = require("./routes/userRoute")
+const { userRouter } = require("./routes/userRoute");
+const { productRouter } = require("./routes/productRoute");
+const { billRouter } = require("./routes/billRoutes");
 
 app.set('view engine', 'ejs');
 const sessionMiddleware = session({
@@ -20,7 +22,8 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use('/', userRouter);
-
+app.use('/product', productRouter);
+app.use('/bill', billRouter);
 
 app.get("*", function (req, res) {
     res.redirect("/");
