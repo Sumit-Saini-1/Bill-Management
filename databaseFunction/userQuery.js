@@ -54,6 +54,10 @@ function countBills() {
     });
 }
 
+/**
+ * @description this is function to get list of bills 
+ * @returns arry of bills object
+ */
 function getAllBill() {
     return new Promise((resolve, reject) => {
         BillModel.find({}).then(function (bills) {
@@ -70,9 +74,10 @@ function getAllBill() {
         });
     })
 }
-/*
-* @params invoiceNo
-* @return Object
+
+/**
+*   @param invoiceNo -invoice no of bill which you want to fetch
+*   @return -object of bill data
 */
 function getBill(invoiceNo) {
     return new Promise((resolve, reject) => {

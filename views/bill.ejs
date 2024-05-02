@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bill {
+            margin: 10px;
+            width: 210mm;
+            height: 292mm;
+            border: 1px solid black;
+        }
+
+        .header {
+            border: 1px solid #000000;
+            text-align: center;
+        }
+
+        .header h4 {
+            text-align: left;
+            margin: 5px;
+        }
+
+        .header h3 {
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .details div {
+            border: 1px solid #000000;
+            padding: 5px;
+        }
+
+        .irncontainer {
+            font-size: 0.8rem;
+        }
+
+        .tableContainer {
+            border: 1px solid black;
+        }
+
+        .billTable,
+        .billTable th,
+        .billTable td {
+            border: 1px solid;
+        }
+
+        .billTable {
+            border-collapse: collapse;
+        }
+
+        .billTable th,
+        .billTable td {
+            padding: 5px;
+        }
+
+        .footer {
+            display: flex;
+            border: 1px solid black;
+        }
+
+        .authoriser {
+            border-left: 1px solid black;
+        }
+
+        .signature {
+            padding: 5px;
+            border-bottom: 1px solid black;
+            height: 40px;
+        }
+
+        .TermsCondition {
+            padding: 5px;
+        }
+
+        .TermsCondition ol {
+            margin-left: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bill">
+            <div class="header">
+                <h4>GSTIN : 06ADVFS7869P1ZL</h4>
+                <h3>TAX INVOICE </h3>
+                <h1>Sahavi Enterprises and Associates</h1>
+                <p>Hinori Road<br> Near Sabji Mandi, Ladwa, 136132</p>
+                <span>CIN :_____________; PAN :___________</span>
+                <h5>Tel. : 7027011887,9560711556 email : sahavi.enterprice@gmail.com </h5>
+            </div>
+            <div class="details">
+
+                <div>
+                    <h5>Invoice No. : <%= invoiceNo %>
+                    </h5>
+                    <h5>Dated : <%= date %>
+                    </h5>
+                    <h5>Place of Supply : <span id="placeOfSpply"></span> </h5>
+                    <h5>Reverse Charge : </h5>
+                    <h5>GR/RR No. :</h5>
+                </div>
+                <div>
+                    <h5>Transport :
+                        <% if (billdetails[0]?.transportBill) { %>
+                            <%= billdetails[0]?.transportBill %>
+                                <% } %>
+                    </h5>
+                    <h5>Vehicle No. :
+                        <% if(billdetails[0]?.vehicleNoBill){%>
+                            <%= billdetails[0]?.vehicleNoBill %>
+                                <% } %>
+                    </h5>
+                    <h5>Station : <span id="stationBill"> </span></h5>
+                    <h5>E-Way Bill No. : <span></span></h5>
+                    <h5>Content :<span></span></h5>
+                </div>
+                <div>
+                    <h5>Billed to :</h5>
+                    <h5>
+                        <%= billdetails[0].customerName %>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerAddress){%>
+                            <%= billdetails[0].customerAddress %>
+                                <%}%>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerDistrict){%>
+                            <%= billdetails[0].customerDistrict %>
+                                <%}%>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerState){%>
+                            <%= billdetails[0].customerState %>
+                                <%}%>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerGSTIN){%>
+                            <%= billdetails[0].customerGSTIN %>
+                                <%}%>
+                    </h5>
+                </div>
+                <div>
+                    <h5>Shipped to : </h5>
+                    <h5>
+                        <%= billdetails[0].customerName %>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerAddress){%>
+                            <%= billdetails[0].customerAddress %>
+                                <%}%>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerDistrict){%>
+                            <%= billdetails[0].customerDistrict %>
+                                <%}%>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerState){%>
+                            <%= billdetails[0].customerState %>
+                                <%}%>
+                    </h5>
+                    <h5>
+                        <% if(billdetails[0]?.customerGSTIN){%>
+                            <%= billdetails[0].customerGSTIN %>
+                                <%}%>
+                    </h5>
+                </div>
+
+            </div>
+            <!-- <div class="irncontainer">IRN : 706560f8fd0b5886f949773bda9e09fae19f504dd20372ed306408962b6c27f6 Ack.No. : 172313805086529 Ack. Date : 06-11-2023</div> -->
+            <div class="tableContainer">
+                <table class="billTable" id="billTable">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Description of Goods</th>
+                            <th>HSN Code</th>
+                            <th>Qty.</th>
+                            <th>Unit</th>
+                            <th>Price/Unit</th>
+                            <th>Discount</th>
+                            <th>IGST Rate </th>
+                            <th>IGST Amount</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% billItems.forEach(function(item){ %>
+
+                            <tr>
+                                <td>
+                                    <%= item.srNo %>
+                                </td>
+                                <td>
+                                    <%= item.name %>
+                                </td>
+                                <td>
+                                    <%= item.HSNcode %>
+                                </td>
+                                <td>
+                                    <%= item.quantity %>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <%= item.price %>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <%= item.gst %>
+                                </td>
+                                <td>
+                                    <%= item.gstAmt %>
+                                </td>
+                                <td>
+                                    <%= item.amount %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="9">Grand Total</td>
+                            <td>
+                                <%= grandTotal%>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="bankDetail">
+                    <p>Company Bank Details</p>
+                    <p>Bank of Baroda :- 53500200000068 </p>
+                    <p>IFCS/RTGS CODE:- BARB0LADWAX <br> Branch :- Ladwa</p>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="TermsCondition">
+                    Terms & Conditions
+                    E.& O.E.
+                    <ol>
+                        <li>All the Part No./Description/Logo are for reference only.</li>
+                        <li>Interest @ 18% p.a. will be charged if the payment is not made with in the stipulated time.
+                        </li>
+                        <li>Subject to 'Delhi' Jurisdiction only.</li>
+                        <li>This is a Computer Generated Invoice</li>
+                    </ol>
+                </div>
+                <div class="authoriser">
+                    <div class="signature">Receiver's Signature :</div>
+                    <div>
+                        <div>For Sahavi Enterprises and Associates</div>
+                        <div>Authorised Signatory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

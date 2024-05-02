@@ -1,4 +1,6 @@
 const { findUserByUserName, getProductsList, addBillToDatabase, countBills, getAllBill, getBill } = require("../databaseFunction/userQuery");
+const makePdf = require("../utils/htmlToPdf");
+const { PassThrough } = require('stream');
 
 function serveLoginPage(req, res) {
     try {
@@ -84,12 +86,28 @@ async function newBill(req, res) {
             res.status(200).json(bill);
             return;
         }
-        addBillToDatabase({ invoiceNo: body.invoiceNo, billdetails: body.billdetails, billItems: body.billItems, grandTotal: body.grandTotal, date: body.date }).then(function (bill) {
-            res.status(200).json(bill);
+        addBillToDatabase({ invoiceNo: body.invoiceNo, billdetails: body.billdetails, billItems: body.billItems, grandTotal: body.grandTotal, date: body.date }).then(async function (bill) {
+            try {
+                const pdf = await makePdf('bill', bill);
+                const pdfStream = new PassThrough()
+                pdfStream.end(pdf)
+                res.set({
+                    'Content-Type': 'application/pdf',
+                    'Content-Disposition': `attachment; filename="bill ${bill.invoiceNo}.pdf"`
+                });
+                pdfStream.pipe(res)
+                return;
+            } catch (error) {
+                console.log(101, error);
+                res.status(500).send("ERROR");
+            }
+            // res.status(200).json(bill);
         }).catch(function (err) {
+            console.log(106, err)
             res.status(500).send("ERROR");
         });
     } catch (error) {
+        console.log(110, error)
         res.status(500).send("ERROR");
     }
 }
@@ -103,6 +121,35 @@ async function generateInvoiceNumber(req, res) {
     res.status(200).json({ invoiceNo: result });
 }
 
+async function getBillPdf(req, res) {
+    try {
+        const invoiceNo = req.query.invoiceNo;
+        if (typeof (invoiceNo) != "string") {
+            res.status(500).send(error);
+        }
+        const billData = await getBill(invoiceNo)
+        // console.log(billData);
+        if (!billData) {
+            res.status(500).send(error);
+        }
+        const pdf = await makePdf('bill', billData);
+        // console.log(16,pdf);
+        // res.setHeader("Content-Type", "application/pdf");
+        // res.send(pdf);
+
+        const pdfStream = new PassThrough()
+        pdfStream.end(pdf)
+        res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': `attachment; filename="bill ${invoiceNo}.pdf"`
+        });
+        pdfStream.pipe(res)
+        return;
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
 module.exports = {
     serveHomePage,
     serveLoginPage,
@@ -113,5 +160,6 @@ module.exports = {
     getProducts,
     newBill,
     generateInvoiceNumber,
-    historyOfBills
+    historyOfBills,
+    getBillPdf,
 }

@@ -161,6 +161,7 @@ getInvoiceNo();
 
 const savebtn = $('#saveBill');
 savebtn.click((ev) => {
+    let filename;
     const billdetails = {
         customerName: customerName.value.trim(),
         customerAddress: customerAddress.value.trim(),
@@ -170,11 +171,27 @@ savebtn.click((ev) => {
         transportBill: transport.value.trim(),
         vehicleNoBill: VehicleNo.value.trim()
     }
-    if (!customerName.value.trim()) {
+    if (!billdetails.customerName) {
         alert("enter customer detail");
         return;
     }
+    if (!billdetails.customerAddress) {
+        alert("Enter customer address");
+        return;
+    }
+    if (!billdetails.customerDistrict) {
+        alert("Enter customer district");
+        return;
+    }
+    if (!billdetails.customerState) {
+        alert("Enter customer state");
+        return;
+    }
     bill.billdetails.push(billdetails);
+    if (!bill.billItems[0]) {
+        alert("Enter atleast one item");
+        return;
+    }
     fetch("/newBill", {
         method: "POST",
         headers: {
@@ -184,13 +201,38 @@ savebtn.click((ev) => {
     }).then(function (response) {
         if (response.status == 200) {
             console.log("saved");
+            const contentDisposition = response.headers.get('Content-Disposition');
+            filename = getFilenameFromContentDisposition(contentDisposition);
+            return response.blob();
         }
-    });
+    }).then(pdf => {
+        // console.log(pdf);
+        const pdfURL = URL.createObjectURL(pdf);
+        const anchor = document.createElement('a');
+        anchor.style.display = 'none';
+        anchor.href = pdfURL;
+        anchor.download = filename || 'bill.pdf';
 
-    print();
-    // getInvoiceNo();
+        document.body.appendChild(anchor);
+        anchor.click();
+
+        setTimeout(() => {
+            window.URL.revokeObjectURL(pdfURL);
+            document.body.removeChild(anchor);
+            print();
+            window.location.reload();
+        }, 0);
+    });
 })
 
 $("#newBill").click(ev => {
     window.location.reload();
 })
+
+function getFilenameFromContentDisposition(contentDisposition) {
+    const match = contentDisposition.match(/filename="(.+?)"/);
+    if (match && match[1]) {
+        return match[1];
+    }
+    return null;
+}
