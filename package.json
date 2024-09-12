@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm i chromium && npm i",
-    "start": "npx puppeteer browsers install chrome && node index.js"
+    "start": "npx puppeteer browsers install chrome && node server.js"
   },
   "keywords": [],
   "author": "",
