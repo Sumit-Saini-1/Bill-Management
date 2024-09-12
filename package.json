@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm i chromium && npm i"
+    "build": "npm i chromium && npm i",
+    "start": "npx puppeteer browsers install chrome && node index.js"
   },
   "keywords": [],
   "author": "",
