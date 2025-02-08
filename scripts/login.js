@@ -18,7 +18,7 @@ submit.addEventListener("click",function(ev){
         headers: {
             "Content-Type": "application/json"
         },
-        body:JSON.stringify({username,password})
+        body:JSON.stringify({username,password,redirect:true})
     }).then(function (response) {
         if(response.status==401){
             alert("password not matched");

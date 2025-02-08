@@ -1,4 +1,5 @@
 const { findUserByUserName } = require("../databaseFunction/userQuery");
+const { createToken } = require("../utils/jwt");
 
 function serveLoginPage(req, res) {
     try {
@@ -31,14 +32,20 @@ function serveStockPage(req, res) {
 
 async function loginUser(req, res) {
     try {
-        const user = await findUserByUserName(req.body.username);
+        const user = await findUserByUserName(req.body?.username.toLocaleLowerCase());
+        const redirectFromServer = req.body?.redirect
         if (user) {
             if (user.password == req.body.password) {
                 req.session.isLoggedIn = true;
                 req.session.username = user.primaryEmail;
                 req.session.name = user.name;
                 req.session._id = user._id;
-                res.redirect("/");
+                if(redirectFromServer){
+                    res.redirect("/");
+                    return;
+                }
+                const token = createToken(user._id, user.username, user.name);
+                res.status(200).json({ "id": user._id, "username": user.primaryEmail, "token": token });
                 return;
             }
             else {
@@ -53,7 +60,7 @@ async function loginUser(req, res) {
 }
 async function getUserDetail(req, res) {
     try {
-        const user = await findUserByUserName(req.body.username);
+        const user = await findUserByUserName(req.body.username.toLocaleLowerCase());
         delete (user.password)
         console.log(user);
     } catch (error) {

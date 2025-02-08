@@ -1,9 +1,9 @@
 const express = require('express');
 const billRouter = express();
 const { isLogin } = require("../auth")
-const { generateInvoiceNumber, historyOfBills, getBillPdf, newBill } = require('../controllers/billController');
+const { getNewInvoiceNumber, historyOfBills, getBillPdf, newBill } = require('../controllers/billController');
 
-billRouter.get("/invoiceNo", isLogin, generateInvoiceNumber);
+billRouter.get("/invoiceNo", isLogin, getNewInvoiceNumber);
 billRouter.get("/allBills", isLogin, historyOfBills);
 billRouter.get("/bill", isLogin, getBillPdf);
 

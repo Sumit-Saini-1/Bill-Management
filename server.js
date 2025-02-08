@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const session = require("express-session");
+const cors = require("cors");
 
 const db = require("./models/db");
 const { userRouter } = require("./routes/userRoute");
@@ -14,6 +15,11 @@ const sessionMiddleware = session({
     resave: false,
     saveUninitialized: true
 });
+app.use(cors({
+    origin: ['*'],
+    methods: ["POST", "GET", "DELETE"],
+    credentials: true
+}));
 app.use(sessionMiddleware);
 app.use(express.static("styles"));
 app.use(express.static("scripts"));

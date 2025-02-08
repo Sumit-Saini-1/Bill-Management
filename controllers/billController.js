@@ -1,18 +1,20 @@
 const { countBills, getAllBill, getBill, addBillToDatabase } = require('../databaseFunction/billQuery');
 const makePdf = require('../utils/htmlToPdf');
 const { PassThrough } = require('stream');
+const generateInvoiceNumber = require('../utils/invoiceNo');
 
-async function generateInvoiceNumber(req, res) {
-    let count = await countBills();
-    const currentDate = new Date();
-    const year = currentDate.getFullYear().toString().slice(-2);
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-    const result = `${year}/${month}/INV/${String(count + 1).padStart(3, '0')}`;
-    res.status(200).json({ invoiceNo: result });
+async function getNewInvoiceNumber(req, res) {
+    try{
+        const invoiceNo = await generateInvoiceNumber(req.session._id);
+        res.status(200).json({ invoiceNo: invoiceNo });
+    }
+    catch (err) {
+        res.status(500).send("error");
+    }
 }
 
 function historyOfBills(req, res) {
-    getAllBill().then(function (bills) {
+    getAllBill(req.session._id).then(function (bills) {
         res.status(200).json(bills);
     }).catch(err => {
         res.status(500).send("error");
@@ -23,12 +25,10 @@ function historyOfBills(req, res) {
 async function newBill(req, res) {
     const body = req.body;
     try {
-        const bill = await getBill(body.invoiceNo);
-        if (bill) {
-            res.status(200).json(bill);
-            return;
+        if (!body.invoiceNo){
+            body.invoiceNo =await generateInvoiceNumber(req.session._id);
         }
-        addBillToDatabase({ invoiceNo: body.invoiceNo, billdetails: body.billdetails, billItems: body.billItems, grandTotal: body.grandTotal, date: body.date }).then(async function (bill) {
+        addBillToDatabase({ invoiceNo: body.invoiceNo, billdetails: body.billdetails, billItems: body.billItems, grandTotal: body.grandTotal, date: body.date, billedBy: req.session._id }).then(async function (bill) {
             try {
                 const pdf = await makePdf('bill', bill);
                 const pdfStream = new PassThrough()
@@ -84,7 +84,7 @@ async function getBillPdf(req, res) {
 }
 
 module.exports = {
-    generateInvoiceNumber,
+    getNewInvoiceNumber,
     historyOfBills,
     newBill,
     getBillPdf

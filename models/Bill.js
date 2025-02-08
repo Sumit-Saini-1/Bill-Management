@@ -19,7 +19,10 @@ const billSchema=new mongoose.Schema({
     // transport:String,
     // vehicleNo:String,
     // station:String,
-
+    billedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 });
 
 const Bill=mongoose.model("Bill",billSchema);

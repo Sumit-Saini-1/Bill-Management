@@ -1,0 +1,67 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.inventoryContainer {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.inventoryContainer table {
+    width: 70%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.inventoryContainer table th,
+.inventoryContainer table td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.billDiv {
+    display: none;
+}
+
+.printbtn {
+    padding: 2px 5px;
+    background: green;
+    border: none;
+    color: white;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .inventoryContainer {
+        padding: 10px;
+        margin: 5px;
+        width: 94vw;
+        overflow-x: scroll;
+        /* border: 1px solid black; */
+    }
+
+    .inventoryContainer table {
+        width: auto;
+        margin: 10px;
+        margin-left: 8rem;
+    }
+
+    .inventoryContainer table th,
+    .inventoryContainer table td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .billDiv {
+        display: none;
+    }
+
+    .printbtn {
+        padding: 2px 5px;
+        background: green;
+        border: none;
+        color: white;
+    }
+}
