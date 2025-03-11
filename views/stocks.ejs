@@ -4,9 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock</title>
+    <link rel="stylesheet" href="/stocks.css">
 </head>
 <body>
     <%- include("components/header") %>
-    <h2>Stock</h2>
+    <div class="topSection">
+        <h2>Stock Management</h2>
+        <button id="addProductBtn">+ Add Product</button>
+    </div>
+        <div class="stocksContainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>HSNcode</th>
+                        <th>Price</th>
+                        <th>GST</th>
+                        <th>Is Active</th>
+                        <th>Stock</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <!-- New product input row -->
+                    <tr id="newProductRow" style="display: none;">
+                        <td contenteditable=true id="newName" placeholder="Product Name"></td>
+                        <td contenteditable=true id="newHSNcode" placeholder="HSN Code"></td>
+                        <td contenteditable=true id="newPrice" placeholder="Price"></td>
+                        <td contenteditable=true id="newGST" placeholder="GST"></td>
+                        <td>
+                            <select id="newIsActive">
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </td>
+                        <td contenteditable=true id="newStock" placeholder="Stock"></td>
+                        <td contenteditable=true><button id="saveProductBtn">Save</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="/stocks.js"></script>
 </body>
 </html>

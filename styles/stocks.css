@@ -1,67 +1,110 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+  /* box-sizing: border-box; */
 }
 
-.inventoryContainer {
-    padding: 5px;
-    display: flex;
-    justify-content: center;
+.topSection {
+  padding-block: 10px;
+  padding-inline: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 15px; */
 }
 
-.inventoryContainer table {
-    width: 70%;
-    border-collapse: collapse;
-    border: 1px solid black;
+#addProductBtn {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.inventoryContainer table th,
-.inventoryContainer table td {
-    border: 1px solid black;
-    padding: 5px;
+#addProductBtn:hover {
+  background-color: #218838;
 }
 
-.billDiv {
-    display: none;
+.stocksContainer {
+  padding-bottom: 10px;
+  padding-inline: 20px;
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  overflow-y: scroll;
 }
 
-.printbtn {
-    padding: 2px 5px;
-    background: green;
-    border: none;
-    color: white;
+.stocksContainer table {
+  width: 90%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
+.stocksContainer table th,
+.stocksContainer table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
 
-@media only screen and (max-width: 600px) {
-    .inventoryContainer {
-        padding: 10px;
-        margin: 5px;
-        width: 94vw;
-        overflow-x: scroll;
-        /* border: 1px solid black; */
-    }
+.stocksContainer table th {
+  background-color: #f0f0f0;
+  color: #333;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 
-    .inventoryContainer table {
-        width: auto;
-        margin: 10px;
-        margin-left: 8rem;
-    }
+.stocksContainer table td {
+  background-color: #fff;
+  color: #555;
+}
 
-    .inventoryContainer table th,
-    .inventoryContainer table td {
-        border: 1px solid black;
-        padding: 5px;
-    }
+.stocksContainer table td select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s ease;
+}
 
-    .billDiv {
-        display: none;
-    }
+.stocksContainer table td select:hover {
+  border-color: #66afe9;
+}
 
-    .printbtn {
-        padding: 2px 5px;
-        background: green;
-        border: none;
-        color: white;
-    }
+.stocksContainer table td select:focus {
+  border-color: #66afe9;
+  outline: none;
+}
+
+.stocksContainer table td button {
+  padding: 5px 15px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.stocksContainer table td button:hover {
+  background-color: #45a049;
+}
+
+.stocksContainer table td button:active {
+  background-color: #388e3c;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+  content: attr(placeholder);
+  pointer-events: none;
 }

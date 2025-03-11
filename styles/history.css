@@ -4,21 +4,64 @@
 }
 
 .billHistoryContainer {
-    padding: 5px;
+    padding: 20px;
     display: flex;
     justify-content: center;
+    height: 80vh;
+    overflow-y: scroll;
 }
 
 .billHistoryContainer table {
-    width: 70%;
+    width: 80%;
     border-collapse: collapse;
-    border: 1px solid black;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
 .billHistoryContainer table th,
 .billHistoryContainer table td {
-    border: 1px solid black;
-    padding: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.billHistoryContainer table th {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+}
+
+.billHistoryContainer table td {
+    background-color: #fff;
+    color: #555;
+    font-size: 14px;
+}
+
+.billHistoryContainer table td:hover {
+    background-color: #f1f1f1;
+    /* Add subtle hover effect */
+}
+
+.billHistoryContainer table td button {
+    padding: 5px 15px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.billHistoryContainer table td button:hover {
+    background-color: #45a049;
+}
+
+.billHistoryContainer table td button:active {
+    background-color: #388e3c;
 }
 
 .billDiv {
@@ -26,10 +69,22 @@
 }
 
 .printbtn {
-    padding: 2px 5px;
-    background: green;
+    padding: 5px 15px;
+    font-size: 14px;
+    background-color: #007bff;
     border: none;
     color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.printbtn:hover {
+    background-color: #0056b3;
+}
+
+.printbtn:active {
+    background-color: #004085;
 }
 
 @media print {

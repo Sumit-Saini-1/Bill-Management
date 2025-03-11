@@ -1,5 +1,5 @@
 const { findUserByUserName } = require("../databaseFunction/userQuery");
-const { createToken } = require("../utils/jwt");
+const { createToken, verifyToken } = require("../utils/jwt");
 
 function serveLoginPage(req, res) {
     try {
@@ -28,6 +28,25 @@ function serveStockPage(req, res) {
     } catch (error) {
         console.log(error);
     }
+}
+
+function verifyUserToken(req,res){
+    const token = req.headers?.authorization;
+    if (!token) {
+        return res.status(401).json({ err: "Not logged in" });
+    }
+    verifyToken(token).then(result => {
+        if (result) {
+            res.status(200).json({ msg: "user is logged in and token is valid" });
+            return;
+        } else {
+            // If token verification fails, send a 401 Unauthorized error
+            return res.status(401).json({ err: "Not logged in" });
+        }
+    }).catch(err => {
+        console.error("Token verification failed:", err);
+        return res.status(401).json({ err: "Not logged in" });
+    });
 }
 
 async function loginUser(req, res) {
@@ -75,4 +94,5 @@ module.exports = {
     serveStockPage,
     loginUser,
     getUserDetail,
+    verifyUserToken,
 }

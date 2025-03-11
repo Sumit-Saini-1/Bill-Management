@@ -1,45 +1,36 @@
-const tbody = document.getElementById("tbody");
+const tbody = $("#tbody");
 
-fetch("/bill/allBills").then(function (response) {
-    if (response.status == 200) {
-        return response.json();
-    }
-}).then(function (bills) {
+$.get("/bill/allBills").done(function (bills) {
     // console.log(bills);
-    bills.reverse().forEach(element => {
-        showList(element);
+    bills.reverse().forEach(function (bill) {
+        showList(bill);
     });
-}).catch(function (err) {
+}).fail(function (err) {
     console.log(err);
 });
 
 function showList(bill) {
-    const tr = document.createElement("tr");
+    const tr = $("<tr></tr>");
 
-    const invoiceNo = document.createElement("td");
-    invoiceNo.innerText = bill.invoiceNo;
-    tr.appendChild(invoiceNo);
+    const invoiceNo = $("<td></td>").text(bill.invoiceNo);
+    tr.append(invoiceNo);
 
-    const customer = document.createElement("td");
-    customer.innerText = bill.billdetails[0].customerName;
-    tr.appendChild(customer);
+    const customer = $("<td></td>").text(bill.billdetails[0].customerName);
+    tr.append(customer);
 
-    const grandTotal = document.createElement("td");
-    grandTotal.innerText = bill.grandTotal.toFixed(2);
-    tr.appendChild(grandTotal);
+    const grandTotal = $("<td></td>").text(bill.grandTotal.toFixed(2));
+    tr.append(grandTotal);
 
-    const date = document.createElement("td");
-    date.innerText = bill.date;
-    tr.appendChild(date);
+    const date = $("<td></td>").text(bill.date);
+    tr.append(date);
 
-    const action = document.createElement("td");
-    const button = document.createElement("a");
-    button.innerText = "Download";
-    button.className = "printbtn";
-    button.href = "/bill/bill?invoiceNo=" + bill.invoiceNo;
-    action.appendChild(button);
+    const action = $("<td></td>");
+    const button = $("<a></a>").text("Download")
+        .addClass("printbtn")
+        .attr("href", "/bill/bill?invoiceNo=" + bill.invoiceNo);
+    action.append(button);
 
-    tr.appendChild(action);
+    tr.append(action);
 
-    tbody.appendChild(tr);
+    tbody.append(tr);
 }

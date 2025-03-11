@@ -1,12 +1,14 @@
 const express = require('express');
 const userRouter = express();
 const { isLogin } = require("../auth")
-const { serveHomePage, serveLoginPage, serveHistoryPage, serveStockPage, loginUser } = require("../controllers/userControllers");
+const { serveHomePage, serveLoginPage, serveHistoryPage, serveStockPage, loginUser, verifyUserToken } = require("../controllers/userControllers");
 
 userRouter.get("/login", serveLoginPage);
 userRouter.get("/", isLogin, serveHomePage);
 userRouter.get("/stock", isLogin, serveStockPage);
 userRouter.get("/billHistory", isLogin, serveHistoryPage);
+
+userRouter.get("/verifyToken",verifyUserToken)
 
 userRouter.post("/login", loginUser);
 userRouter.get("/logout", function (req, res) {

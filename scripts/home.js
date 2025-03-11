@@ -152,7 +152,9 @@ function insertRow(data) {
 
 function createDatalist(array) {
     const arr = array.map((val, index) => {
-        return $op = $("<option>", { id: index, "class": "option", "value": val.name });
+        if(val?.isActive){
+            return $op = $("<option>", { id: index, "class": "option", "value": val.name });
+        }
     })
     $("#itemsuggestions").append(arr)
 }
