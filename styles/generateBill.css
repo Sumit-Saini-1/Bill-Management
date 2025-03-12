@@ -1,70 +1,92 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
 .container {
     display: flex;
+    flex-wrap: wrap;
+    /* Ensures responsiveness */
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
 }
 
 input {
     text-transform: capitalize;
+    font-size: 14px;
 }
 
+/* Form Section */
 .inner {
-    margin: 0;
-    display: flex;
-    height: fit-content;
-    width: 35%;
-    padding: 5px;
+    width: 40%;
+    /* Adjust width for better spacing */
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .upper,
 .lower {
     width: 100%;
     display: flex;
-    padding: 5px;
+    padding: 10px;
     border-bottom: 1px solid black;
+    gap: 10px;
 }
 
 .recepientLabels,
 .recepientInputs {
-    width: 30%;
-    height: 350px;
+    width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-}
-
-.recepientInputs {
-    width: 70%;
+    gap: 10px;
 }
 
 .recepientInputs input,
 .inputs input {
-    width: 90%;
-    height: 20px;
-    padding: 4px 10px;
+    width: 100%;
+    padding: 8px;
     border: 1px solid gray;
-    border-radius: 8px;
+    border-radius: 6px;
+    transition: border-color 0.3s ease-in-out;
 }
 
+.recepientInputs input:focus,
+.inputs input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Item Entry */
 .labels,
 .inputs {
-    width: 30%;
-    height: 120px;
+    width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
+    gap: 10px;
 }
 
-.inputs {
-    width: 70%;
+.inputs input {
+    width: 100%;
 }
 
+/* Buttons */
 #addItem,
 #newBill {
-    margin-top: 15px;
+    margin-top: 10px;
     width: 50%;
     padding: 8px 16px;
     border-radius: 10px;
@@ -72,13 +94,34 @@ input {
     background-color: salmon;
     color: white;
     cursor: pointer;
+    display: block;
+    /* Ensures buttons appear on separate lines */
+    text-align: center;
 }
 
+#addItem {
+    margin-bottom: 5px;
+    /* Adds spacing below the first button */
+}
+
+#addItem:hover,
+#newBill:hover {
+    background-color: #ff6f61;
+}
+
+/* Bill Section */
 .billDiv {
-    margin: 5px 10px;
-    padding: 0px 18px;
+    width: 55%;
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    /* Prevents layout breaking */
 }
 
+/* Responsive Styles */
 @media only screen and (max-width: 600px) {
     .container {
         display: flex;
@@ -163,6 +206,7 @@ input {
     }
 }
 
+/* Print Styles */
 @media print {
     .inner {
         display: none;
