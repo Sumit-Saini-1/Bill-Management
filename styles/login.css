@@ -1,83 +1,145 @@
+/* General Styles */
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.container {
-    /* margin: 10px; */
-    height: 85vh;
+body {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('/images/hero-bg.webp') no-repeat center center/cover;
+    position: relative;
+}
+
+/* Dark Overlay for Readability */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Dark overlay */
 }
 
-.container form {
-    height: 60vh;
-    width: 30%;
-    padding: 20px;
+/* Back to Home Button */
+.back-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    background: #f4b400;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.back-home:hover {
+    background: #d89a00;
+    color: white;
+}
+
+/* Container */
+.container {
+    position: relative;
+    z-index: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: none;
-    box-shadow: 0px 0px 8px grey;
+    width: 100%;
 }
 
+/* Form Styling */
+.container form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Heading */
+.container form h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Elements */
 .formelement {
     display: flex;
     flex-direction: column;
-    padding: 3px;
-    margin: 2px;
-    width: 25vw;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.formelement label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #555;
 }
 
 .formelement input {
-    margin: 3px;
-    padding: 10px;
-}
-
-#submit {
+    padding: 12px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 15px;
-    border: none;
-    background-color: dodgerblue;
-    color: white;
-    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
 }
 
-@media only screen and (max-width: 600px) {
-    .container {
-        margin: 5px;
-        height: 85vh;
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
+.formelement input:focus {
+    border-color: #f4b400;
+    box-shadow: 0 0 5px rgba(244, 180, 0, 0.5);
+}
 
+/* Submit Button */
+#submit {
+    background: #f4b400;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+#submit:hover {
+    background: #d89a00;
+}
+
+/* Links */
+.formelement p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.formelement a {
+    color: #f4b400;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.formelement a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
     .container form {
-        height: 60vh;
-        width: 70%;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        border: none;
-        box-shadow: 0px 0px 8px grey;
-    }
-
-    .formelement {
-        display: flex;
-        flex-direction: column;
-        padding: 3px;
-        margin: 2px;
-        width: 70vw;
-    }
-
-    .formelement input {
-        margin: 3px;
-        padding: 10px;
+        width: 80%;
     }
 }

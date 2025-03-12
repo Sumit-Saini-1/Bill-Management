@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahavi Enterprises | Premium Engine Oils & Filters</title>
+    <meta name="description"
+        content="Sahavi Enterprises provides high-quality engine oil, hydra filters, fuel filters, and transmission filters for smooth vehicle performance.">
+    <link rel="stylesheet" href="/home.css">
+</head>
+
+<body>
+    <%- include("components/header") %>
+
+        <section class="hero">
+            <div class="overlay"></div>
+            <div class="hero-content">
+                <h1>Premium Engine Oils & Filters</h1>
+                <p>Top-quality automotive oils and filters to enhance your vehicle’s performance.</p>
+                <a href="/products" class="btn">Explore Products</a>
+            </div>
+        </section>
+
+        <section class="about">
+            <h2>About Sahavi Enterprises</h2>
+            <p>We specialize in premium-quality engine oils and filters, ensuring your vehicle runs smoothly and
+                efficiently.</p>
+        </section>
+
+        <section class="products">
+            <h2>Our Products</h2>
+            <div class="product-list">
+                <% products.forEach(product=> { %>
+                    <div class="product-item">
+                        <img src="<%= product.image %>" alt="<%= product.name %>">
+                        <h3>
+                            <%= product.name %>
+                        </h3>
+                    </div>
+                    <% }); %>
+            </div>
+            <a href="/products" class="btn">View More</a>
+        </section>
+
+        <section class="contact">
+            <h2>Contact Us</h2>
+            <p>Have questions? We’d love to hear from you.</p>
+            <a href="mailto:info@sahavienterprises.com" class="btn">Email Us</a>
+        </section>
+
+        <%- include('components/footer.ejs') %>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+                integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

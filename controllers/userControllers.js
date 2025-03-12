@@ -10,11 +10,26 @@ function serveLoginPage(req, res) {
 }
 function serveHomePage(req, res) {
     try {
-        res.render("home");
+        const products = [
+            { name: "Engine Oil", image: "/images/engine-oil.webp" },
+            { name: "Hydra Filter", image: "/images/hydra-filter.webp" },
+            { name: "Fuel Filter", image: "/images/fuel-filter.webp" },
+        ];
+
+        res.render("index", { products });
     } catch (error) {
         console.log(error);
     }
 }
+
+function serverBillGeneratePage(req,res){
+    try{
+        res.render("generateBill")
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 function serveHistoryPage(req, res) {
     try {
         res.render("history");
@@ -90,6 +105,7 @@ async function getUserDetail(req, res) {
 module.exports = {
     serveHomePage,
     serveLoginPage,
+    serverBillGeneratePage,    
     serveHistoryPage,
     serveStockPage,
     loginUser,
