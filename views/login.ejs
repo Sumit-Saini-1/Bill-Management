@@ -4,34 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
-    <link rel="stylesheet" href="/login.css" />
+    <title>Login | Sahavi Enterprises</title>
+    <link rel="stylesheet" href="/login.css">
 </head>
 
 <body>
+    <!-- Back to Home Button -->
+    <a href="/" class="back-home">← Home</a>
+
     <div class="container">
         <form method="post">
             <h2>Log in</h2>
             <div class="formelement">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" />
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="formelement">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" />
+                <input type="password" id="password" name="password" required>
             </div>
             <div class="formelement">
-                <input type="submit" id="submit" value="Submit" />
+                <input type="submit" id="submit" value="Login">
             </div>
             <!-- <div class="formelement">
-                <p>new user can signup <a href="/signup">here</a></p>
+                <p>New user? <a href="/signup">Sign up here</a></p>
             </div>
             <div class="formelement">
-                <p>Forgot password <a href="/forgotPassword">click here</a></p>
+                <p>Forgot password? <a href="/forgotPassword">Click here</a></p>
             </div> -->
         </form>
-        <script src="/login.js"></script>
     </div>
+    <script src="/login.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@ const { countBills, getAllBill, getBill, addBillToDatabase } = require('../datab
 const makePdf = require('../utils/htmlToPdf');
 const { PassThrough } = require('stream');
 const generateInvoiceNumber = require('../utils/invoiceNo');
+const { updatedProductDb } = require('../databaseFunction/productQuery');
 
 async function getNewInvoiceNumber(req, res) {
     try{
@@ -30,6 +31,9 @@ async function newBill(req, res) {
         }
         addBillToDatabase({ invoiceNo: body.invoiceNo, billdetails: body.billdetails, billItems: body.billItems, grandTotal: body.grandTotal, date: body.date, billedBy: req.session._id }).then(async function (bill) {
             try {
+                body?.billItems.map((item)=>{
+                    updatedProductDb(item?._id, { stock: parseInt(item?.stock) - parseInt(item?.quantity) });
+                });
                 const pdf = await makePdf('bill', bill);
                 const pdfStream = new PassThrough()
                 pdfStream.end(pdf)

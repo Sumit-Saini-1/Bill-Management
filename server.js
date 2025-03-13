@@ -23,6 +23,7 @@ app.use(cors({
 app.use(sessionMiddleware);
 app.use(express.static("styles"));
 app.use(express.static("scripts"));
+app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
