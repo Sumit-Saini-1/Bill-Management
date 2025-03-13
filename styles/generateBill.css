@@ -54,6 +54,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    justify-content: space-evenly;
 }
 
 .recepientInputs input,
@@ -78,6 +79,7 @@ input {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    justify-content: space-evenly;
 }
 
 .inputs input {

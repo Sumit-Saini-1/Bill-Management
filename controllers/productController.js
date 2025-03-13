@@ -24,7 +24,7 @@ function getProducts(req, res) {
 function updateProduct(req, res) {
     const { id } = req.params;
     const { name, HSNcode, price, gst, isActive, stock } = req.body;
-    updatedProductDb(id, name, HSNcode, price, gst, isActive, stock).then(data=>{
+    updatedProductDb(id, { name, HSNcode, price, gst, isActive, stock }).then(data=>{
         res.status(200).json(data);
     }).catch(function (err) {
         res.status(500).send("ERROR");

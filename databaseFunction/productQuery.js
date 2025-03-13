@@ -31,24 +31,38 @@ function addProductDb(name, HSNcode, price, gst, sellerId, isActive = true, stoc
 }
 
 /**
- * this is for update product details in db
- * @param {string} id 
- * @param {string} name 
- * @param {string} HSNcode 
- * @param {number} price 
- * @param {number} gst 
- * @param {boolean} isActive 
- * @param {number} stock
- * @returns 
+ * Updates product details in the database with only received valid values.
+ * @param {string} id - The product ID.
+ * @param {Object} data - The updated product details.
+ * @param {string} [data.name] - The product name.
+ * @param {string} [data.HSNcode] - The HSN code.
+ * @param {number} [data.price] - The price.
+ * @param {number} [data.gst] - The GST percentage.
+ * @param {boolean} [data.isActive] - Active status.
+ * @param {number} [data.stock] - Available stock.
+ * @returns {Promise<Object>} - The updated product document.
  */
-function updatedProductDb(id, name, HSNcode, price, gst, isActive, stock) {
-  return new Promise((resolve, reject) => {
-    ProductModel.updateOne({ _id: id }, { name, HSNcode, price, gst, isActive, stock }).then(updatedProduct => {
-      resolve(updatedProduct);
-    }).catch((err) => {
-      reject(err)
-    });
-  })
+async function updatedProductDb(id, data) {
+  try {
+    // Remove undefined values from the update object
+    const updateData = Object.fromEntries(
+      Object.entries(data).filter(([_, value]) => value !== undefined)
+    );
+
+    if (Object.keys(updateData).length === 0) {
+      throw new Error("No valid fields provided for update.");
+    }
+
+    const updatedProduct = await ProductModel.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+
+    if (!updatedProduct) {
+      throw new Error("Product not found.");
+    }
+
+    return updatedProduct;
+  } catch (err) {
+    throw new Error(`Failed to update product: ${err.message}`);
+  }
 }
 
 /**
