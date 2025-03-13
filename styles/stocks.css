@@ -6,6 +6,8 @@
 
 body {
   background: url('/images/hero-bg.webp') no-repeat center center/cover;
+  position: relative;
+  height: 100vh;
 }
 
 .topSection {
@@ -36,7 +38,7 @@ body {
   padding-inline: 20px;
   display: flex;
   justify-content: center;
-  height: 75vh;
+  height: 72vh;
   overflow-y: scroll;
 }
 
